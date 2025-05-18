@@ -1,19 +1,31 @@
 package com.example.movieapp.model;
 
+import jakarta.persistence.*;
+
+@Entity
 public class Movie {
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
+
     private String title;
     private String director;
+
+    @Column(name = "release_year")
     private int year;
 
-    public Movie(Long id, String title, String director, int year) {
-        this.id = id;
+
+    // Üres konstruktor (kötelező JPA-hoz)
+    public Movie() {}
+
+    // Paraméteres konstruktor
+    public Movie(String title, String director, int year) {
         this.title = title;
         this.director = director;
         this.year = year;
     }
 
-    // GETTEREK
+    // Getterek
     public Long getId() {
         return id;
     }
@@ -30,7 +42,7 @@ public class Movie {
         return year;
     }
 
-    // SETTEREK (hiányzó setId() hozzáadva)
+    // Setterek
     public void setId(Long id) {
         this.id = id;
     }
