@@ -24,6 +24,9 @@
             <td th:text="${movie.year}"></td>
             <td>
                 <a th:href="@{'/movies/' + ${movie.id}}" class="btn btn-info btn-sm">Részletek</a>
+                <form th:action="@{'/movies/' + ${movie.id} + '/delete'}" method="post" style="display: inline;">
+                    <button type="submit" class="btn btn-danger btn-sm" onclick="return confirm('Biztosan törölni szeretnéd ezt a filmet?')">Törlés</button>
+                </form>
             </td>
         </tr>
         </tbody>

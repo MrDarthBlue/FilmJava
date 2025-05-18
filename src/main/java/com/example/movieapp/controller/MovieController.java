@@ -30,12 +30,18 @@ public class MovieController {
     @GetMapping("/new")
     public String showAddForm(Model model) {
         model.addAttribute("movie", new Movie());
-        return "movies/form";  // Ellenőrizze, hogy a templates/movies/form.html létezik
+        return "movies/form";
     }
 
     @PostMapping
     public String addMovie(@ModelAttribute Movie movie) {
         movieService.addFilm(movie);
+        return "redirect:/movies";
+    }
+
+    @PostMapping("/{id}/delete")
+    public String deleteMovie(@PathVariable Long id) {
+        movieService.deleteFilm(id);
         return "redirect:/movies";
     }
 }

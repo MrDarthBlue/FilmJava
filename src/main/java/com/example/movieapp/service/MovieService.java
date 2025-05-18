@@ -29,6 +29,7 @@ public class MovieService {
         }
     }
 
+
     public List<Movie> getAllFilms() {
         return movieRepository.findAll();
     }
@@ -40,5 +41,9 @@ public class MovieService {
 
     public Movie addFilm(Movie movie) {
         return movieRepository.save(movie);  // Visszaadjuk az elmentett entitást
+    }
+    // Add this method to MovieService.java
+    public void deleteFilm(Long id) {
+        movieRepository.deleteById(id);
     }
 }
