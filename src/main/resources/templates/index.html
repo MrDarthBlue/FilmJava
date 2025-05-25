@@ -3,11 +3,77 @@
 <head>
     <title>Film Alkalmazás</title>
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+    <style>
+        .hero-section {
+            background: linear-gradient(135deg, #6e8efb, #a777e3);
+            color: white;
+            padding: 5rem 0;
+            border-radius: 0 0 20px 20px;
+            margin-bottom: 3rem;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+        }
+        .btn-primary {
+            background-color: #6e8efb;
+            border-color: #6e8efb;
+            padding: 0.5rem 1.5rem;
+            font-weight: 500;
+            transition: all 0.3s;
+        }
+        .btn-primary:hover {
+            background-color: #5a7df4;
+            border-color: #5a7df4;
+            transform: translateY(-2px);
+        }
+        footer {
+            background-color: #f8f9fa;
+            padding: 2rem 0;
+            margin-top: 3rem;
+            text-align: center;
+        }
+    </style>
 </head>
 <body>
-<div class="container mt-4">
-    <h1>Üdvözöljük a Film Alkalmazásban!</h1>
-    <a href="/movies" class="btn btn-primary">Filmek listája</a>
+<div class="hero-section text-center">
+    <div class="container">
+        <h1 class="display-4 fw-bold mb-4">Üdvözöljük a Film Alkalmazásban!</h1>
+        <p class="lead mb-4">Fedezze fel kedvenc filmjeit és sorozatait egy helyen</p>
+        <a href="/movies" class="btn btn-primary btn-lg">Filmek listája</a>
+    </div>
 </div>
+
+<div class="container mb-5">
+    <div class="row text-center">
+        <div class="col-md-4 mb-4">
+            <div class="card h-100 shadow-sm">
+                <div class="card-body">
+                    <h3 class="h4">Filmek böngészése</h3>
+                    <p>Tekintse meg a rendelkezésre álló filmek teljes katalógusát</p>
+                </div>
+            </div>
+        </div>
+        <div class="col-md-4 mb-4">
+            <div class="card h-100 shadow-sm">
+                <div class="card-body">
+                    <h3 class="h4">Új film hozzáadása</h3>
+                    <p>Adjon hozzá új filmeket a gyűjteményhez</p>
+                </div>
+            </div>
+        </div>
+        <div class="col-md-4 mb-4">
+            <div class="card h-100 shadow-sm">
+                <div class="card-body">
+                    <h3 class="h4">Részletes információk</h3>
+                    <p>Tekintse meg a filmek részletes adatait</p>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<footer class="text-muted">
+    <div class="container">
+        <p class="mb-0">© 2025 Film Alkalmazás | Minden jog fenntartva</p>
+    </div>
+</footer>
 </body>
 </html>

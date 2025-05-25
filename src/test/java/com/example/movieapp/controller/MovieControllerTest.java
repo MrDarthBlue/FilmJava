@@ -8,12 +8,13 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.autoconfigure.web.servlet.AutoConfigureMockMvc;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.boot.test.mock.mockito.MockBean;
+import org.springframework.http.MediaType;
 import org.springframework.test.web.servlet.MockMvc;
 
 import java.util.List;
 
 import static org.hamcrest.Matchers.*;
-import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.get;
+import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.*;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.*;
 
 @SpringBootTest
@@ -25,6 +26,7 @@ class MovieControllerTest {
 
     @MockBean
     private MovieService movieService;
+
 
     @Test
     void testListMovies() throws Exception {
@@ -48,6 +50,7 @@ class MovieControllerTest {
                 )));
     }
 
+
     @Test
     void testViewMovie() throws Exception {
         Movie movie = new Movie("Interstellar", "Christopher Nolan", 2014);
@@ -61,4 +64,46 @@ class MovieControllerTest {
                 .andExpect(model().attributeExists("movie"))
                 .andExpect(model().attribute("movie", hasProperty("title", is("Interstellar"))));
     }
+
+
+    @Test
+    void testShowCreateForm() throws Exception {
+        mockMvc.perform(get("/movies/new"))
+                .andExpect(status().isOk())
+                .andExpect(view().name("movies/form"))
+                .andExpect(model().attributeExists("movie"));
+    }
+
+
+    @Test
+    void testSaveMovie() throws Exception {
+        mockMvc.perform(post("/movies")
+                        .contentType(MediaType.APPLICATION_FORM_URLENCODED)
+                        .param("title", "Dune")
+                        .param("director", "Denis Villeneuve")
+                        .param("year", "2021"))
+                .andExpect(status().is3xxRedirection())
+                .andExpect(redirectedUrl("/movies"));
+
+        Mockito.verify(movieService).addMovie(Mockito.any(Movie.class));
+    }
+
+
+    // --- Új törlés teszt ---
+
+    @Test
+    void testDeleteMovie() throws Exception {
+        Long movieIdToDelete = 5L;
+
+        // Mock a szolgáltatás törlési metódusát (void metódusnál nem kell visszatérési érték)
+        Mockito.doNothing().when(movieService).deleteMovie(movieIdToDelete);
+
+        mockMvc.perform(post("/movies/{id}/delete", movieIdToDelete))
+                .andExpect(status().is3xxRedirection())
+                .andExpect(redirectedUrl("/movies"));
+
+        // Ellenőrizzük, hogy meghívódott a deleteMovie metódus a service-ben
+        Mockito.verify(movieService).deleteMovie(movieIdToDelete);
+    }
+
 }

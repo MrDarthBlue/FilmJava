@@ -3,26 +3,75 @@
 <head>
     <title>Új film</title>
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+    <style>
+        .form-container {
+            background: white;
+            border-radius: 10px;
+            box-shadow: 0 0 20px rgba(0, 0, 0, 0.05);
+            padding: 2rem;
+            margin-top: 2rem;
+        }
+        .form-label {
+            font-weight: 500;
+        }
+        .btn-primary {
+            background-color: #6e8efb;
+            border-color: #6e8efb;
+            transition: all 0.3s;
+        }
+        .btn-primary:hover {
+            background-color: #5a7df4;
+            border-color: #5a7df4;
+            transform: translateY(-2px);
+        }
+        .btn-secondary {
+            transition: all 0.3s;
+        }
+        .btn-secondary:hover {
+            transform: translateY(-2px);
+        }
+    </style>
 </head>
 <body>
-<div class="container mt-4">
-    <h1>Új film</h1>
-    <form th:action="@{/movies}" th:object="${movie}" method="post">
-        <div class="mb-3">
-            <label class="form-label">Cím</label>
-            <input type="text" class="form-control" th:field="*{title}" required>
+<nav class="navbar navbar-expand-lg navbar-dark bg-dark">
+    <div class="container">
+        <a class="navbar-brand" href="/">Film Alkalmazás</a>
+        <div class="navbar-nav">
+            <a class="nav-link" href="/movies">Filmek</a>
+            <a class="nav-link active" href="/movies/new">Új film</a>
         </div>
-        <div class="mb-3">
-            <label class="form-label">Rendező</label>
-            <input type="text" class="form-control" th:field="*{director}" required>
-        </div>
-        <div class="mb-3">
-            <label class="form-label">Megjelenés éve</label>
-            <input type="number" class="form-control" th:field="*{year}" min="1900" max="2030" required>
-        </div>
-        <button type="submit" class="btn btn-primary">Mentés</button>
-        <a href="/movies" class="btn btn-secondary">Mégse</a>
-    </form>
+    </div>
+</nav>
+
+<div class="container my-5">
+    <h1 class="h2 mb-4">Új film hozzáadása</h1>
+
+    <div class="form-container">
+        <form th:action="@{/movies}" th:object="${movie}" method="post">
+            <div class="mb-3">
+                <label class="form-label">Cím</label>
+                <input type="text" class="form-control" th:field="*{title}" required>
+            </div>
+            <div class="mb-3">
+                <label class="form-label">Rendező</label>
+                <input type="text" class="form-control" th:field="*{director}" required>
+            </div>
+            <div class="mb-3">
+                <label class="form-label">Megjelenés éve</label>
+                <input type="number" class="form-control" th:field="*{year}" min="1900" max="2030" required>
+            </div>
+            <div class="d-flex gap-2">
+                <button type="submit" class="btn btn-primary">Mentés</button>
+                <a href="/movies" class="btn btn-secondary">Mégse</a>
+            </div>
+        </form>
+    </div>
 </div>
+
+<footer class="bg-dark text-white py-4">
+    <div class="container text-center">
+        <p class="mb-0">© 2025 Film Alkalmazás | Minden jog fenntartva</p>
+    </div>
+</footer>
 </body>
 </html>
