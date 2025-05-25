@@ -9,41 +9,72 @@ import org.springframework.stereotype.Service;
 
 import java.util.List;
 
+/**
+ * Service layer for movie operations.
+ */
 @Service
 public class MovieService {
+    /**
+     * Repository for accessing movie data.
+     */
     private final MovieRepository movieRepository;
 
+
+    /**
+     * Constructs a new MovieService with the given repository.
+     * @param movieRepository the movie repository
+     */
     @Autowired
     public MovieService(MovieRepository movieRepository) {
         this.movieRepository = movieRepository;
     }
 
+    /**
+     * Initializes sample data if database is empty.
+     */
     @PostConstruct
     @Transactional
     public void init() {
-        // Csak akkor töltjük fel az adatokat, ha üres az adatbázis
         if (movieRepository.count() == 0) {
             movieRepository.save(new Movie("Inception", "Christopher Nolan", 2010));
             movieRepository.save(new Movie("The Matrix", "Lana Wachowski, Lilly Wachowski", 1999));
-            System.out.println("Alapadatok betöltve");
+            System.out.println("Initial data loaded");
         }
     }
 
-
-    public List<Movie> getAllFilms() {
+    /**
+     * Retrieves all movies.
+     * @return list of all movies
+     */
+    public List<Movie> getAllMovies() {
         return movieRepository.findAll();
     }
 
-    public Movie getFilmById(Long id) {
+    /**
+     * Retrieves a movie by ID.
+     * @param id the movie ID
+     * @return the found movie
+     * @throws RuntimeException if movie not found
+     */
+    public Movie getMovieById(Long id) {
         return movieRepository.findById(id)
-                .orElseThrow(() -> new RuntimeException("Film not found with id: " + id));
+                .orElseThrow(() -> new RuntimeException("Movie not found with id: " + id));
     }
 
-    public Movie addFilm(Movie movie) {
-        return movieRepository.save(movie);  // Visszaadjuk az elmentett entitást
+    /**
+     * Adds a new movie.
+     * @param movie the movie to add
+     * @return the saved movie
+     */
+    public Movie addMovie(Movie movie) {
+        return movieRepository.save(movie);
     }
-    // Add this method to MovieService.java
-    public void deleteFilm(Long id) {
+
+    /**
+     * Deletes a movie by ID.
+     * @param id the movie ID to delete
+     */
+    public void deleteMovie(Long id) {
         movieRepository.deleteById(id);
     }
 }

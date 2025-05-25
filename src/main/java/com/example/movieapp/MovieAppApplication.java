@@ -13,6 +13,9 @@ import java.io.File;
 @SpringBootApplication
 public class MovieAppApplication {
 
+    /**
+     * Repository for accessing and managing movie data.
+     */
     @Autowired
     private MovieRepository movieRepository;
 
@@ -46,3 +49,4 @@ public class MovieAppApplication {
         }
     }
 }
+
