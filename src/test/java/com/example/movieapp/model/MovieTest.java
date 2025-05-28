@@ -14,11 +14,13 @@ class MovieTest {
         movie.setTitle("Interstellar");
         movie.setDirector("Christopher Nolan");
         movie.setYear(2014);
+        movie.setPosterFilename("interstellar.jpg");
 
         assertEquals(10L, movie.getId());
         assertEquals("Interstellar", movie.getTitle());
         assertEquals("Christopher Nolan", movie.getDirector());
         assertEquals(2014, movie.getYear());
+        assertEquals("interstellar.jpg", movie.getPosterFilename());
     }
 
     @Test
@@ -29,5 +31,8 @@ class MovieTest {
         assertEquals("Inception", movie.getTitle());
         assertEquals("Christopher Nolan", movie.getDirector());
         assertEquals(2010, movie.getYear());
+
+        // posterFilename nincs konstruktornál megadva, így null az értéke
+        assertNull(movie.getPosterFilename());
     }
 }
