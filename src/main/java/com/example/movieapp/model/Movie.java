@@ -117,4 +117,27 @@ public class Movie {
     public void setYear(int year) {
         this.year = year;
     }
+
+    /**
+     * The filename of the movie poster.
+     */
+    @Column(name = "poster_filename")
+    private String posterFilename;
+
+    /**
+     * Gets the poster filename.
+     * @return the poster filename
+     */
+    public String getPosterFilename() {
+        return posterFilename;
+    }
+
+    /**
+     * Sets the poster filename.
+     * @param posterFilename the poster filename to set
+     */
+    public void setPosterFilename(String posterFilename) {
+        this.posterFilename = posterFilename;
+    }
+
 }

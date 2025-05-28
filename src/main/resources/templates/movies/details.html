@@ -42,6 +42,12 @@
         <div class="card-body">
             <p class="fs-5"><strong>Rendező:</strong> <span th:text="${movie.director}"></span></p>
             <p class="fs-5"><strong>Megjelenés éve:</strong> <span th:text="${movie.year}"></span></p>
+
+            <div th:if="${movie.posterFilename}">
+                <p class="fs-5 mt-4"><strong>Poszter:</strong></p>
+                <img th:src="@{'/posters/' + ${movie.posterFilename}}" alt="Film poszter"
+                     class="img-fluid rounded shadow-sm mt-2" style="max-height: 400px;">
+            </div>
         </div>
     </div>
 

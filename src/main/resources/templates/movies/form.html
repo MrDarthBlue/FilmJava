@@ -47,7 +47,7 @@
     <h1 class="h2 mb-4">Új film hozzáadása</h1>
 
     <div class="form-container">
-        <form th:action="@{/movies}" th:object="${movie}" method="post">
+        <form th:action="@{/movies}" th:object="${movie}" method="post" enctype="multipart/form-data">
             <div class="mb-3">
                 <label class="form-label">Cím</label>
                 <input type="text" class="form-control" th:field="*{title}" required>
@@ -59,6 +59,10 @@
             <div class="mb-3">
                 <label class="form-label">Megjelenés éve</label>
                 <input type="number" class="form-control" th:field="*{year}" min="1900" max="2030" required>
+            </div>
+            <div class="mb-3">
+                <label class="form-label">Poszter feltöltése</label>
+                <input type="file" class="form-control" name="posterFile" accept="image/*">
             </div>
             <div class="d-flex gap-2">
                 <button type="submit" class="btn btn-primary">Mentés</button>
